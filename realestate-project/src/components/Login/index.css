@@ -1,0 +1,12 @@
+.hoverBtnRemove :hover {
+    background: #C2410C !important;
+    color: white !important;
+    outline: none !important;
+    border: #C2410C;
+    
+    
+}
+.btnSize{
+    width: 25%;
+    /* height: 25%; */
+}
