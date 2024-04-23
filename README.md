@@ -37,7 +37,4 @@ This repository contains both the frontend and backend components of the project
 3. Set up environment variables.
 4. Run the application.
 
-### Additional Notes
 
-- Ensure proper authentication for editing and deleting listings.
-- Make sure to handle user input securely, especially for contact forms.
