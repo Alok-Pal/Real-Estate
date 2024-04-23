@@ -7,7 +7,7 @@ import { toastText } from "../../constants/Data";
 export default function Header() {
   const [accessToken, setAccessToken] = useState("");
   const userToken = useSelector((data) => data.logIn);
-  
+
   useEffect(() => {
     const dataToken = localStorage.getItem("AccessToken");
     setAccessToken(dataToken);
@@ -107,6 +107,18 @@ export default function Header() {
                   }
                 >
                   Contact
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/wishlist"
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 ${
+                      isActive ? "text-orange-700" : "text-gray-700"
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
+                >
+                  Wishlist
                 </NavLink>
               </li>
             </ul>

@@ -18,15 +18,8 @@ class UserRepository {
         return res
     }
 
-    async getUserData(userId: string) {
+    async getUserData() {
 
-        // const res = await prisma.user.findUnique({
-        //     where: {
-        //         id: userId
-        //     }, include: {
-        //         listing: true
-        //     }
-        // })
         const res = await prisma.user.findMany({
             include: {
                 listing: true

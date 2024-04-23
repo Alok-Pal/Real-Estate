@@ -61,11 +61,10 @@ class UserController {
         }
     }
 
-    async getUserData(req: Request, res: Response, next: NextFunction) {
+    async getUserData(req: any, res: Response, next: NextFunction) {
         try {
-
-            const userId = '6624be855315843d9b7a020e'
-            const response = await userRepository.getUserData(userId)
+            
+            const response = await userRepository.getUserData()
             DefaultResponse(res, 200, 'UserData getSuccessFully', response)
         } catch (error) {
             next(res.json(error))

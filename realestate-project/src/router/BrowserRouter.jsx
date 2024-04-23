@@ -11,6 +11,7 @@ import LoginPage from "../components/Login/LoginPage.jsx";
 import SignUpPage from "../components/SignUp/SignUpPage.jsx";
 import User from "../components/User/User";
 import CardDetail from "../components/CardDetails/CardDetail.jsx";
+import Wishlist from "../components/Wishlist/Wishlist.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ export const Router = createBrowserRouter([
       {
         path: "/cardDetail/:id",
         element: <CardDetail/>
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist/>
       },
     ],
   },

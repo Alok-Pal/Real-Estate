@@ -1,12 +1,45 @@
-import { EyeOutlined } from "@ant-design/icons";
-import { Avatar, Card } from "antd";
-import React from "react";
+import { EyeOutlined, HeartOutlined } from "@ant-design/icons";
+import { Avatar, Card, Tooltip } from "antd";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toastText } from "./../../constants/Data";
+import axios from "axios";
 
 const { Meta } = Card;
 
 const ListingCard = (props) => {
   const { listData } = props;
+
+  const onClickWishlistHandler = (values) => {
+   
+    const accessToken = localStorage.getItem("AccessToken");
+    if (accessToken) {
+        axios
+          .post(
+            `${process.env.REACT_APP_API_ENDPOINT}/wishlist/create`,
+            values,
+            {
+              headers: {
+                authorization: `Bearer ${accessToken}`,
+              },
+            }
+          )
+          .then((response) => {
+            if (response?.data?.statusCode === 200) {
+              toastText(response?.data?.message, "success");
+            } else {
+              toastText(response?.data?.message, "error");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            toastText("An error occurred while adding to wishlist", "error");
+          });
+    } else {
+      toastText("You have to login first", "error");
+    }
+  };
+
   return (
     <>
       {listData.length > 0 ? (
@@ -14,8 +47,9 @@ const ListingCard = (props) => {
           className="grid  lg:grid-cols-4 justify-center gap-7 mb-10"
           style={{}}
         >
-          {listData.map((data) => (
+          {listData.map((data, index) => (
             <Card
+              key={index}
               className="shadow hover:shadow-lg cursor-pointer "
               style={{ width: 300 }}
               cover={
@@ -27,12 +61,21 @@ const ListingCard = (props) => {
               }
               // actions={[<EyeOutlined key="view" onClick={ clickHandler(data) } />]}
               actions={[
-                <Link
-                  to={`/cardDetail/${data.id}`} // Navigate to a detail page with ID in the URL
-                  key="view"
-                >
-                  <EyeOutlined />
-                </Link>,
+                <Tooltip placement="bottom" title="view">
+                  <Link
+                    to={`/cardDetail/${data.id}`} // Navigate to a detail page with ID in the URL
+                    key="view"
+                  >
+                    <EyeOutlined />
+                  </Link>
+                </Tooltip>,
+                <Tooltip placement="bottom" title="wishlist">
+                  <HeartOutlined
+                    onClick={() => {
+                      onClickWishlistHandler(data);
+                    }}
+                  />
+                </Tooltip>,
               ]}
             >
               <Meta
@@ -61,7 +104,9 @@ const ListingCard = (props) => {
         </div>
       ) : (
         <>
-        <div className="flex justify-center font-bold text-4xl mt-40 mb-40">No data found !!!</div>
+          <div className="flex justify-center font-bold text-4xl mt-40 mb-40">
+            No data found !!!
+          </div>
         </>
       )}
     </>
