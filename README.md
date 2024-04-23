@@ -1,6 +1,9 @@
 ## Project Overview
 
-This repository contains both the frontend and backend components of the project. Users can simply clone this repository and execute `npm install` for both frontend and backend to download all dependencies. Additionally, environment variables are included to facilitate setup.
+This repository contains both the frontend and backend components of the project. Users can simply clone this repository and execute `npm install` for both frontend and backend to download all dependencies. Additionally, environment variables are included to facilitate setup. Please make sure to run the command to generate the prisma `npx prisma generate` while doing this the name of Database url contsant has to be same which is provided in the Prisma. datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
 
 ### Backend Setup
 - MongoDB Atlas is utilized, eliminating the need for users to set up the database.
