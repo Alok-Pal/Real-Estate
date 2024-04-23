@@ -42,11 +42,12 @@ class WishlistRepository {
         }
     }
 
-    async getWishlistRepoByListId(listId: string) {
+    async getWishlistRepoByListId(listId: string,userId:string) {
         try {
             const res = await prisma.wishlist.findFirst({
                 where: {
-                    listId: listId
+                    listId: listId,
+                    wishlistUserId:userId
                 }
             })
             return res

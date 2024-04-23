@@ -19,7 +19,7 @@ class WishlistController {
                 return next(res.json(error));
             }
 
-            const wishListAlreadyExists = await wishListRepository.getWishlistRepoByListId(data.id)
+            const wishListAlreadyExists = await wishListRepository.getWishlistRepoByListId(data.id,userId)
             if (wishListAlreadyExists) {
                 const error = new CustomError(
                     401,
@@ -51,7 +51,6 @@ class WishlistController {
     async deleteWishlist(req: any, res: Response, next: NextFunction) {
         try {
             const deleteDataId = req.params.id
-            console.log("🚀 ~ WishlistController ~ deleteWishlist ~ deleteData:", deleteDataId)
             const response = await wishListRepository.deleteWishlistRepo(deleteDataId)
             DefaultResponse(res,200,'Listing is deleted from wishlist',response)
         } catch (error) {
