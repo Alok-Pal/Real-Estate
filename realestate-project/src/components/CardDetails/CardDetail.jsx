@@ -26,7 +26,7 @@ const CardDetail = () => {
 
   const [listData, setListData] = useState([]);
   const [filterData, setFilterData] = useState({});
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   const navigate = useNavigate();
 
   // For Edit
@@ -99,12 +99,21 @@ const CardDetail = () => {
 
   const mergeListings = useCallback((users) => {
     const mergedListings = [];
-
+  
     users.forEach((user) => {
-      mergedListings.push(...user.listing);
+      // Add user information (name, email) to each listing
+      const userWithListing = user.listing.map((listing) => ({
+        ...listing,
+        name: user.name,
+        email: user.email,
+      }));
+  
+      mergedListings.push(...userWithListing);
     });
+  
     setListData(mergedListings);
   }, []);
+  
 
   useEffect(() => {
     axios
@@ -115,8 +124,8 @@ const CardDetail = () => {
       .catch((err) => {
         console.log(err);
       });
-    const userDetail = JSON.parse(localStorage.getItem("user"));
-    setUserData({ name: userDetail?.name, email: userDetail?.email });
+    // const userDetail = JSON.parse(localStorage.getItem("user"));
+    // setUserData({ name: userDetail?.name, email: userDetail?.email });
   }, [mergeListings]);
 
   useEffect(() => {
@@ -159,9 +168,9 @@ const CardDetail = () => {
             </p>
             <div>
               <p className="mx-2 my-2 mt-10 text-xl font-bold">
-                {userData?.name}
+                {filterData?.name}
               </p>
-              <p className="mx-2 my-2  text-xl font-serif">{userData?.email}</p>
+              <p className="mx-2 my-2  text-xl font-serif">{filterData?.email}</p>
             </div>
           </div>
           <div
