@@ -139,7 +139,7 @@ const CardDetail = () => {
         <div className=" p-14">
           <Image
             className="w-2/4 rounded-lg"
-            src={`http://localhost:8000/Images/${filterData?.image}`}
+            src={`${process.env.REACT_APP_IMAGES}/Images/${filterData?.image}`}
             alt=""
           />
         </div>

@@ -100,7 +100,7 @@ const Wishlist = () => {
               cover={
                 <img
                   alt={`${data?.image}`}
-                  src={`http://localhost:8000/Images/${data?.image}`}
+                  src={`${process.env.REACT_APP_IMAGES}/Images/${data?.image}`}
                 />
               }
               actions={[

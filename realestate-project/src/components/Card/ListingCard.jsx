@@ -55,8 +55,7 @@ const ListingCard = (props) => {
               cover={
                 <img
                   alt={`${data?.image}`}
-                  // src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  src={`http://localhost:8000/Images/${data?.image}`}
+                  src={`${process.env.REACT_APP_IMAGES}/Images/${data?.image}`}
                 />
               }
               // actions={[<EyeOutlined key="view" onClick={ clickHandler(data) } />]}
